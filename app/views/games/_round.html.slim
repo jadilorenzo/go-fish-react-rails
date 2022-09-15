@@ -1,0 +1,67 @@
+= form_for(game, url: game_path(game), remote: true)
+<<<<<<< HEAD
+      .flex
+        .card.half-width
+          .card__header
+            h2 Players
+          .card__body
+            - game.go_fish.players.each_with_index do |player, index|
+              - if player.user_id == user.id
+                b You [#{pluralize(player.books.count, 'book')}]
+              - else
+                input type='hidden' id="asking-player" name='asking-player' value="#{user.id}"
+                .form__group
+                  span #{player.name} [#{pluralize(player.books.count, 'book')}]
+                  - if game.go_fish.find_by_id(user.id) == game.go_fish.turn_player
+                    = submit_tag 'Ask', name: "#{player.user_id}", class: 'btn-primary player-ask', data: { disable_with: 'Asking...'}
+        .card.half-width
+          .card__header
+            - if game.go_fish.turn_player.name == user.name
+              li: b It's your turn!
+            - else
+              li It's #{game.go_fish.turn_player.name}'s turn!
+            h3 Round Results
+          .card__body
+            -game.go_fish.history.each do |result|
+              li = current_player.format(result)
+      .flex
+        .card.card--max-height.flex-grow-1
+          .card__header
+            h2 Your Hand
+            - if game.go_fish.find_by_id(user.id) == game.go_fish.turn_player
+              span = "(Select a card) ⬇️"
+          .card__body.card__body-hand
+            .form__group.form_hand.gap-sm.flex-wrap
+              - game.go_fish.find_by_id(user.id).hand.each_with_index do |card, index|
+                input.form__radio.playing-card-radio id="rank-#{index}" type='radio' name='rank' value="#{card.rank}"
+                label.form__label.card-in-hand for="rank-#{index}"
+                  / = image_tag "#{Card::HUMANIZED_SUITS.fetch(card.suit).downcase}_#{card.rank.downcase}.svg", class: 'card-image'
+=======
+  .flex.flex-col.game-padding 
+    h2 Players
+    - game.go_fish.players.each_with_index do |player, index| 
+      - if player.user_id == user.id
+        b You [#{pluralize(player.books.count, 'book')}]
+      - else 
+        input type='hidden' id="asking-player" name='asking-player' value="#{user.id}"
+        .form__group
+          span #{player.name} [#{pluralize(player.books.count, 'book')}]
+          - if game.go_fish.find_by_id(user.id) == game.go_fish.turn_player
+            = submit_tag 'Ask', name: "#{player.user_id}", class: 'btn-primary player-ask', data: { disable_with: 'Asking...'}
+    - if game.go_fish.turn_player.name == user.name
+      li: b It's your turn!
+    - else 
+      li It's #{game.go_fish.turn_player.name}'s turn!
+    h3 Round Results
+    -game.go_fish.history.each do |result|
+      li = current_player.format(result)
+    .flex.flex-col.game-padding
+      h2 Your Hand
+      - if game.go_fish.find_by_id(user.id) == game.go_fish.turn_player
+        span = "(Select a card) ⬇️"
+      .form__group.form_hand.gap-sm.flex-wrap
+        - game.go_fish.find_by_id(user.id).hand.each_with_index do |card, index|
+          input.form__radio.playing-card-radio id="rank-#{index}" type='radio' name='rank' value="#{card.rank}"
+          label.form__label.card-in-hand for="rank-#{index}"
+            = image_tag "#{Card::HUMANIZED_SUITS.fetch(card.suit).downcase}_#{card.rank.downcase}.svg", class: 'card-image'
+>>>>>>> 79fbff04577234602b731de022ae0cc89da23c04

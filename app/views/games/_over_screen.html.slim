@@ -1,0 +1,8 @@
+h1 = "#{'Winner'.pluralize(game.go_fish.winner.count)} of #{game.name}"
+
+.card--padded.flex.flex-col
+  - game.go_fish.winner.each do |winner|
+    h2: b #{winner.name} wins! 🎉
+  .flex.justify-end
+    = link_to 'Play Again', games_path, class: 'btn-primary'
+    / = "Waiting on #{pluralize(game.waiting_count, 'player')}..."

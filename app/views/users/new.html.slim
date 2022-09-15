@@ -1,0 +1,11 @@
+.card 
+  = simple_form_for @user do |f|
+    .card__header 
+      h1 Sign up 
+    .card__body 
+      = f.input :name 
+      = f.input :email 
+      = f.input :password 
+      = f.input :password_confirmation
+    .card__footer.flex.justify-end 
+      = f.submit 'Sign up', class: 'btn-primary'

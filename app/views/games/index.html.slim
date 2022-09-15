@@ -1,0 +1,8 @@
+.
+  h1 My Games
+  = render partial: @my_games
+
+.
+  h1 Open Games
+  = link_to 'Create Game', new_game_path, class: 'btn-primary'
+  = render partial: @open_games

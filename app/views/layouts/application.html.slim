@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Go Fish
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'stylesheets', 'data-turbolinks-track': 'reload'
+    meta name='viewport' content='width=device-width'
+    / meta name='turbo-visit-control' content='reload'
+    link href="http://fonts.cdnfonts.com/css/avenir-next-cyr" rel="stylesheet"
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    / = javascript_importmap_tags
+  body
+    = render 'shared/flash'
+    .
+      = render 'layouts/header'
+      .container.paper-border
+        = yield

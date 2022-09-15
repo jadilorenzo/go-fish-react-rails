@@ -1,0 +1,10 @@
+development:
+  adapter: async
+
+test:
+  adapter: test
+
+production:
+  adapter: redis
+  url: redis://redistogo:7c10ea978a2a10e29abe09dbc9078505@barb.redistogo.com:9249/
+  # channel_prefix: GoFishRails_production

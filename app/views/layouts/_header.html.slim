@@ -1,0 +1,8 @@
+header.nav-bar
+  = link_to 'Go Fish', root_path, class: 'nav-bar__brand'
+  - if logged_in?
+    .nav
+      = render partial: 'layouts/nav_button', locals: {label: 'Stats', path: stats_path}
+      = render partial: 'layouts/nav_button', locals: {label: 'Profile', path: user_path(session[:user_id])}
+      = link_to 'Log out', logout_path, class: 'nav-bar__link', method: :delete
+

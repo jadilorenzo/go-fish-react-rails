@@ -1,0 +1,4 @@
+- if current_page?(path)
+  = link_to label, path, class: 'nav-bar__link nav-bar__link--active'
+- else
+  = link_to label, path, class: 'nav-bar__link'

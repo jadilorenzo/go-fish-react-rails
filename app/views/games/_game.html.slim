@@ -1,0 +1,3 @@
+.card--padded.flex.justify-between
+  = link_to "#{game.name}", join_game_path(game), class: 'game__link', method: :post
+  = "#{game.user_count + game.bot_count}/#{game.player_count}"
