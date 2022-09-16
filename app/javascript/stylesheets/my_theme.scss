@@ -15,6 +15,7 @@ a.btn-primary {
 
 :root {
   --bg-primary: #1e88e5;
+  --bg-primary-minor: #1a84e1;
   --bg-secondary: #1a73c2;
   --color-black-primary: black;
   --color-white-primary: white;
@@ -30,7 +31,7 @@ a.btn-primary {
   padding: 1rem;
   padding-bottom: calc(1rem - 0.25rem);
   justify-items: center;
-  border-bottom: 0.15rem solid var(--bg-secondary);
+  border-bottom: 0.2rem solid var(--bg-secondary);
 }
 
 a.nav-bar__brand {
@@ -99,7 +100,7 @@ a.nav-bar__link {
   background-color: var(--bg-primary);
   border-radius: 0.5rem;
   color: var(--color-white-primary);
-  border: 0.15rem solid var(--bg-primary);
+  border: 0.15rem solid var(--bg-primary-minor);
   padding: 0.5rem;
   padding-left: 0.9rem;
   padding-right: 0.9rem;
@@ -128,4 +129,68 @@ a.nav-bar__link {
 
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+
+.app-top {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.app--section {
+  // flex-grow: 1;
+  width: 100%;
+}
+
+.player {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  height: 2rem;
+  margin-bottom: 0.125rem;
+  margin-top: 0.125rem;
+}
+
+.player--section {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+@media (min-width: 830px) {
+  .app-top {
+    flex-direction: row;
+  }
+
+  .app--section {
+    width: 50%;
+  }
+}
+
+.cards {
+  display: flex;
+}
+
+.card {
+  width: 1.25rem;
+  margin-bottom: 0;
+  margin-top: 3rem;
+  transition: 100ms ease all;
+
+  &:hover {
+    margin-top: 0;
+    margin-bottom: 3rem;
+    transition: 100ms ease all;
+  }
+}
+
+.card--selected {
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
+
+.card--img {
+  height: 14rem;
+  width: 10rem;
 }

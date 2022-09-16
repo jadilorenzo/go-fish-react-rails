@@ -14,7 +14,7 @@ export default class RoundResults extends Component {
     render() {
         return (
             <div>
-                <div>Round Results:</div>
+                <h4>Round Results:</h4>
                 {this.props.roundResults.map((result, index) => <div key={index}>{result}</div>)}
             </div>
         )

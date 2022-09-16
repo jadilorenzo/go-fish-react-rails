@@ -1,11 +1,9 @@
-.card 
-  .card__header 
-    h1 Login 
-  .card__body
-    = simple_form_for(@user, url: login_path, scope: :session) do |f| 
-      = f.input :email 
-      = f.input :password
-      .card__footer.flex.justify-between data-controller='user'
-        p New User? #{link_to 'Click here to join', signup_path}
-        = f.submit 'Login', class: 'btn-primary', data: {action: 'user#loggedIn'}
+
+h1 Login
+= simple_form_for(@user, url: login_path, scope: :session) do |f|
+  = f.input :email
+  = f.input :password
+  . data-controller='user'
+    p New User? #{link_to 'Click here to join', signup_path}
+    = f.submit 'Login', class: 'btn-primary', data: {action: 'user#loggedIn'}
 

@@ -1,10 +1,6 @@
-.card 
-  = simple_form_for @game do |f|
-    .card__header 
-      h1 New Game
-    .card__body 
-      = f.input :name 
-      = f.input :player_count, collection: [2,3,4,5]
-      = f.input :bot_count, collection: [0,1,2,3,4]
-    .card__footer 
-      = f.submit 'Create', class: 'btn-primary'
+= simple_form_for @game do |f|
+    h1 New Game
+    = f.input :name
+    = f.input :player_count, collection: [2,3,4,5]
+    = f.input :bot_count, collection: [0,1,2,3,4]
+    = f.submit 'Create', class: 'btn-primary'

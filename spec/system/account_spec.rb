@@ -25,10 +25,6 @@ RSpec.describe 'Login', type: :system do
   end
 
   describe 'signup' do
-<<<<<<< HEAD
-
-=======
->>>>>>> 79fbff04577234602b731de022ae0cc89da23c04
     describe 'successful signup' do
       it 'signs in successfully' do
         visit signup_path
@@ -39,10 +35,6 @@ RSpec.describe 'Login', type: :system do
         click_on 'Sign up'
         expect(page).to have_content('Games')
       end
-<<<<<<< HEAD
-
-=======
->>>>>>> 79fbff04577234602b731de022ae0cc89da23c04
     end
 
     describe 'failed signup' do

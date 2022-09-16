@@ -50,10 +50,20 @@ class Game < ApplicationRecord
   def finished?
     finished_at.present?
   end
- 
-  def finish 
+
+  def finish
     self.finished_at = Time.zone.now
     game_users.update_all(finished: true)
     game_users.where(user_id: go_fish.winner.map{|winner| winner.user_id}).update_all(winner: true)
+  end
+
+  def as_json
+    {
+      id: id,
+      player_count: player_count,
+      bot_count: bot_count,
+      go_fish: go_fish.as_json,
+      waiting_count: waiting_count
+    }
   end
 end

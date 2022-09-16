@@ -9,18 +9,23 @@ export default class Card extends Component {
 
     static propTypes = {
         card: PropTypes.any.isRequired,
-        setRank: PropTypes.func.isRequired
+        setRank: PropTypes.func.isRequired,
+        rank: PropTypes.string.isRequired
     }
 
     render() {
-        const {card} = this.props
-        const id = `${card.suit()}_${ card.rank()}`
+        const {card, rank} = this.props
+        const id = `${card.suit()}_${card.rank()}`
         return (
             <div
-
                 onClick={() => this.props.setRank({ rank: card.rank() })}
+                className={`card ${rank === card.rank() ? 'card--selected' : ''}`}
             >
-                <img src={`${id}.svg`} alt={id}/>
+                <img
+                    className='card--img'
+                    src={card.rank() ? `/assets/${id}.svg` : undefined}
+                    alt={id}
+                />
             </div>
         )
     }

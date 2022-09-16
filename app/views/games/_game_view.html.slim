@@ -1,11 +1,6 @@
 .game data-controller='game' data-game-id=game.id data-game-user_id=user.id
-<<<<<<< HEAD
   .game_view data-game-target='game_view'
     h1 = game.name
-=======
-  .game-view.game-padding data-game-target='game_view'
-    h1 = game.name 
->>>>>>> 79fbff04577234602b731de022ae0cc89da23c04
     -if game.ready?
       = render partial: 'games/round', locals: {game: game, current_player: current_player, user: user}
     -else

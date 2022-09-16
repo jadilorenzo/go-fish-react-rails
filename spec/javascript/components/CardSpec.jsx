@@ -5,7 +5,7 @@ import { CardModel } from "models";
 
 test("calls setRank", () => {
     const setRank = jest.fn()
-    render(<Card card={new CardModel('C', 'A')} setRank={({rank}) => setRank({rank})} />);
+    render(<Card card={new CardModel({ suit: 'C', rank: 'A' })} setRank={({rank}) => setRank({rank})} />);
     const card = screen.getByAltText(/C_A/i)
     expect(card).toBeInTheDocument();
     fireEvent.click(card)

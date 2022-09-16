@@ -9,25 +9,30 @@ export default class Player extends Component {
 
     static propTypes = {
         onAsk: PropTypes.func.isRequired,
-        player: PropTypes.any.isRequired,
-        index: PropTypes.number.isRequired,
+        player: PropTypes.object.isRequired,
         cardSelected: PropTypes.bool.isRequired
     }
 
     render() {
+        const { player, index, cardSelected } = this.props
         return (
-            <div>
-                <div>
-                    <div>{this.props.player.name}</div>
-                    <div>{this.props.player.isBot() || "(you)"}</div>
+            <div className='player paper-border'>
+                <div className='player--section'>
+                    <span>{player.name}</span>
+                    <span>{!player.isYou() || " (you)"}</span>
+                    <span>{player.hand.length} card{player.hand.length === 1 || 's'}</span>
                 </div>
-                <div>{this.props.player.hand().length} card{this.props.player.hand().length === 1 || 's'}</div>
-                <div>{this.props.player.books().map((book) => (
-                    book[0].rank()
-                )).join(', ')}</div>
-                {(this.props.index !== 0 && this.props.cardSelected) ? (
-                    <button role={`ask-${this.props.index}`}>Ask</button>
-                ) : null}
+
+                <div className='player--section'>
+                    <div>{player.books.join(', ')}</div>
+                    {(index !== 0 && cardSelected) ? (
+                        <button
+                            className='btn-primary'
+                            onClick={() => this.props.onAsk({ id: player.id })}
+                            role={`ask-${player.id}`}
+                        >Ask</button>
+                    ) : null}
+                </div>
             </div>
         )
     }

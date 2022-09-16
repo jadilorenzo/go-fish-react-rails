@@ -1,12 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'Game' do
+RSpec.describe 'Game', :js, type: :system do
   let!(:user1) { create(:user) }
   let!(:user2) { create(:user, name: 'Josh', email: 'josh@example.com') }
   describe 'Create Game' do
     it 'successfully creates a game' do
       login(user1)
-      expect(page).to have_content('Create Game')
       click_on 'Create Game'
       fill_in 'Name', with: 'Braden\'s game'
       select '2', from: 'Player count'
@@ -29,10 +28,12 @@ RSpec.describe 'Game' do
 
   describe 'Playing a game' do
     it 'shows the correct content of a game' do
-      game = create(:game, :two_players, name: 'Test based')
+      create(:game, :two_players, name: 'Test based')
       login(user2)
       click_on 'Test based'
       expect(page).to have_content('Players')
+      expect(page).to have_content('Round Results')
+      expect(page).to have_content('Hand')
     end
 
     it 'Can play a round', :js do
