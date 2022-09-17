@@ -8,24 +8,26 @@ export default class Player extends Component {
     }
 
     static propTypes = {
-        onAsk: PropTypes.func.isRequired,
+        onAsk: PropTypes.func,
         player: PropTypes.object.isRequired,
-        cardSelected: PropTypes.bool.isRequired
+        cardSelected: PropTypes.bool,
+        isYourTurn: PropTypes.bool,
+        you: PropTypes.bool
     }
 
     render() {
-        const { player, index, cardSelected } = this.props
+        const { player, cardSelected, isYourTurn, you } = this.props
         return (
             <div className='player paper-border'>
                 <div className='player--section'>
                     <span>{player.name}</span>
-                    <span>{!player.isYou() || " (you)"}</span>
-                    <span>{player.hand.length} card{player.hand.length === 1 || 's'}</span>
+                    <span>{!you || " (you)"}</span>
+                    {you || <span>{player.handCount} card{player.handCount === 1 || 's'}</span>}
                 </div>
 
                 <div className='player--section'>
                     <div>{player.books.join(', ')}</div>
-                    {(index !== 0 && cardSelected) ? (
+                    {(!you && cardSelected && isYourTurn) ? (
                         <button
                             className='btn-primary'
                             onClick={() => this.props.onAsk({ id: player.id })}

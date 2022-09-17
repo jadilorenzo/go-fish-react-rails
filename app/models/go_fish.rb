@@ -102,6 +102,10 @@ class GoFish
     players.reject { |player| player == turn_player }.map(&:user_id)
   end
 
+  def return_opponents(user)
+    players.reject { |player| player == user }
+  end
+
   def check_emptiness
     return unless turn_player.hand.empty?
 
@@ -147,6 +151,20 @@ class GoFish
       round_results: @round_results,
       round_count: @round_count,
       turn_player: turn_player.as_json,
+    }
+  end
+
+  def state_for(user_id, waiting_count, name)
+    player = find_by_id user_id
+    {
+      currentUser: player.as_json,
+      opponents: return_opponents(player).map(&:as_opponent_json),
+      roundResults: history,
+      startedStatus: started_status,
+      waitingCount: waiting_count,
+      name: name,
+      turnId: turn_player.user_id,
+      turnName: turn_player.name
     }
   end
 

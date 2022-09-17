@@ -9,6 +9,15 @@ class Player
     @books = books
   end
 
+  def as_opponent_json
+    {
+      name: name,
+      id: user_id,
+      books: books,
+      handCount: hand_count
+    }
+  end
+
   def format(result)
     result.gsub(name, 'You')
   end
@@ -62,7 +71,7 @@ class Player
       name: name,
       hand: hand.map(&:as_json),
       books: books,
-      user_id: user_id,
+      id: user_id,
     }
   end
 

@@ -1,6 +1,7 @@
 {
     "game":
-        {"id":3,
+        {
+            "id":3,
             "name": "Jacob SUcks",
             "player_count": 3,
             "created_at": "2022-09-14T20:22:44.736Z",

@@ -66,4 +66,8 @@ class Game < ApplicationRecord
       waiting_count: waiting_count
     }
   end
+
+  def state_for(user)
+    go_fish.state_for(user.id, waiting_count, name)
+  end
 end
