@@ -39,7 +39,7 @@ export default class Card extends Component {
                 className={`card ${rank === card.rank ? 'card--selected' : ''}`}
             >
                 <img
-                    className='card--img'
+                    className='card--img card-image'
                     src={card.rank ? `/assets/${id}.svg` : undefined}
                     alt={id}
                 />

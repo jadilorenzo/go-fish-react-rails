@@ -10,9 +10,6 @@ export default class Game extends Component {
     constructor(props) {
         super(props)
         this.state = { ...props.game, rank: '' }
-
-        console.log(props)
-
         if (props.game) this.connectToPusher(props)
     }
 
@@ -45,7 +42,7 @@ export default class Game extends Component {
     }
 
     setRank({ rank }) {
-        this.setState({ rank    })
+        this.setState({ rank })
     }
 
     render() {
