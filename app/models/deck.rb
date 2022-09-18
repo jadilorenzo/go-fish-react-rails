@@ -1,4 +1,4 @@
-# frozen_string_literal: true 
+# frozen_string_literal: true
 
 class Deck
   attr_accessor :cards
@@ -28,7 +28,7 @@ class Deck
     new_cards = json[:cards].map {|card| Card.from_json(card)}
     self.new(new_cards)
   end
-  
+
   def ==(other)
     cards == other.cards
   end
@@ -38,7 +38,7 @@ class Deck
   def build_deck
     Card::SUITS.flat_map do |suit|
       Card::RANKS.map do |rank|
-        card = Card.new(rank, suit)
+        Card.new(rank, suit)
       end
     end
   end

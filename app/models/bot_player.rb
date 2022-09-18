@@ -1,4 +1,4 @@
-# frozen_string_literal: true 
+# frozen_string_literal: true
 
 class BotPlayer < Player
   attr_accessor :name, :hand, :books, :user_id
@@ -8,15 +8,15 @@ class BotPlayer < Player
     @hand = hand
     @books = books
   end
-  
+
   def new_name
-    Faker::Movies::StarWars.character 
+    Faker::Name.name
   end
-  
+
   def select_player(player_ids)
     player_ids.sample
   end
-  
+
   def select_rank
     hand.uniq { |card| card.rank }.sample.rank
   end

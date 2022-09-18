@@ -47,14 +47,18 @@ class GamesController < ApplicationController
   def play_round
     puts "play_round_params", play_round_params
     game = Game.find(params[:id])
-    # player_id = params.to_unsafe_hash.invert['Ask']
-    # return unless params['asking-player'].to_i == game.go_fish.turn_player.user_id
-    # return unless params['rank'] && player_id
 
     game.play_round(
       play_round_params[:rank],
       play_round_params[:askee],
     )
+
+    game.users.each do |user|
+      if (user.id != play_round_params[:asker])
+        ActionCable.server.broadcast "game_update_#{user.id}", { message: 'Data changed.' }
+      end
+    end
+
 
     # if game.go_fish.over?
     #   game.users.each do |user|
