@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Card from './Card'
 import Player from './Player'
 import RoundResults from './RoundResults'
+import Api from './Api'
 
 export default class Game extends Component {
     constructor(props) {
@@ -18,8 +19,14 @@ export default class Game extends Component {
         game:  PropTypes.object.isRequired,
     }
 
-    onAsk({ id }) {
-        console.log("Player selected: ", id, this.state.rank)
+    async onAsk({ id }) {
+        const result = await Api.playRound({
+            id: this.state.id,
+            asker: this.state.currentUser.id,
+            askee: id,
+            rank: this.state.rank,
+        })
+        this.setState({...result})
     }
 
     setRank({ rank }) {
@@ -28,7 +35,7 @@ export default class Game extends Component {
 
     render() {
         const {
-            started,
+            startedStatus,
             waitingCount,
             name,
             opponents,
@@ -39,14 +46,12 @@ export default class Game extends Component {
             roundResults,
         } = this.state
 
-        const isYourTurn = turnId === currentUser.id
-
-        console.log(this.state, rank)
+        const isYourTurn = turnId === currentUser?.id
 
         return (
             <div>
                 <h2>Go Fish</h2>
-                {(!started) ?  (
+                {(startedStatus) ?  (
                         <div>
                             <div>{name}</div>
                             <div className='app-top'>
@@ -54,6 +59,7 @@ export default class Game extends Component {
                                     <h4>Players</h4>
                                      <Player
                                         player={currentUser}
+                                        isCurrentPlayer={isYourTurn}
                                         you
                                     />
                                     {opponents.map((player) => (
@@ -61,6 +67,7 @@ export default class Game extends Component {
                                             key={player.id}
                                             player={player}
                                             cardSelected={rank !== ''}
+                                            isCurrentPlayer={turnId === player.id}
                                             isYourTurn={isYourTurn}
                                             onAsk={({id}) => this.onAsk({id})}
                                         />
@@ -69,7 +76,7 @@ export default class Game extends Component {
                                 <div>
                                     <RoundResults roundResults={roundResults} />
                                     <br/>
-                                    <u>It's {turnName}'s turn.</u>
+                                    <u>It's {isYourTurn ? "your" : `${turnName}'s`} turn.</u>
                                 </div>
                             </div>
                             <div className='app--section'>

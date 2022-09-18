@@ -71,6 +71,15 @@ class Player
       name: name,
       hand: hand.map(&:as_json),
       books: books,
+      user_id: user_id,
+    }
+  end
+
+  def as_state
+    {
+      name: name,
+      hand: hand.map(&:as_json),
+      books: books,
       id: user_id,
     }
   end

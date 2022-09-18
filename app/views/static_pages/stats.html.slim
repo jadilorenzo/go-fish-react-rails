@@ -1,58 +1,48 @@
 h1 Stats
-.flex.flex-col 
-  .card 
-    .card__header 
-      h2 Games Played 
-    .card__body 
-      table.flex.gap-md
-        tbody
-        - @finished_games.each do |user, game_count|
-          -if user.id == current_user.id
-            tr
-              td: b = "You: "
-              td: b = "#{pluralize(game_count, 'Game')}"
-          -else 
-            tr 
-              td = "#{user.name}: "
-              td = "#{pluralize(game_count, 'Game')}"
-  .card.margin-y-lg 
-    .card__header 
-      h2 Win %
-    .card__body 
-      table.flex.gap-md
-        tbody
-        - @win_percentage.each do |user, percentage|
-          -if user.id == current_user.id
-            tr
-              td: b = "You: "
-              td: b = "#{percentage}%"
-          -else 
-            tr 
-              td = "#{user.name}: "
-              td = "#{percentage}%"
-  .card
-    .card__header 
-      h2 Time Played
-    .card__body 
-      table.flex.gap-md
-        tbody
-        - @time_played.each do |user, time|
-          -if user.id == current_user.id
-            tr
-              td: b = "You: "
-              td: b = "#{seconds_to_time(time.seconds)}"
-          -else 
-            tr 
-              td = "#{user.name}: "
-              td = "#{seconds_to_time(time.seconds)}"
-
-  .card.margin-y-lg 
-    .card__header 
-      h2 Greatest Rival
-    .card__body 
-      table.flex.gap-md
-        tbody
-        - @rival.each do |rival, games|
-          tr 
-            td = "#{rival.name}: "
-            td = "#{pluralize(games, 'Game')}"
+div
+  h2 Games Played
+  table
+    tbody
+    - @finished_games.each do |user, game_count|
+      -if user.id == current_user.id
+        tr
+          td: b = "You: "
+          td: b = "#{pluralize(game_count, 'Game')}"
+      -else
+        tr
+          td = "#{user.name}: "
+          td = "#{pluralize(game_count, 'Game')}"
+div
+  h2 Win %
+  table
+    tbody
+    - @win_percentage.each do |user, percentage|
+      -if user.id == current_user.id
+        tr
+          td: b = "You: "
+          td: b = "#{percentage}%"
+      -else
+        tr
+          td = "#{user.name}: "
+          td = "#{percentage}%"
+div
+  h2 Time Played
+  table
+    tbody
+    - @time_played.each do |user, time|
+      -if user.id == current_user.id
+        tr
+          td: b = "You: "
+          td: b = "#{seconds_to_time(time.seconds)}"
+      -else
+        tr
+          td = "#{user.name}: "
+          td = "#{seconds_to_time(time.seconds)}"
+div
+  h2 Greatest Rival
+  table
+    tbody
+    - @rival.each do |rival, games|
+      tr
+        td = "#{rival.name}: "
+        td = "#{pluralize(games, 'Game')}"

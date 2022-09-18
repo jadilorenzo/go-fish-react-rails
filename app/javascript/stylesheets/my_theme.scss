@@ -153,7 +153,7 @@ a.nav-bar__link {
 
 .player--section {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.3rem;
 }
@@ -193,4 +193,8 @@ a.nav-bar__link {
 .card--img {
   height: 14rem;
   width: 10rem;
+}
+
+.bold {
+  font-weight:  bold;
 }

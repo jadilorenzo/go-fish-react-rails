@@ -21,8 +21,8 @@ class Game < ApplicationRecord
     users.count < player_count
   end
 
-  def play_round(rank, player_id)
-    go_fish.play_round(rank, player_id)
+  def play_round(rank, askee_id)
+    go_fish.play_round(rank, askee_id)
     go_fish.play_bot_rounds
     if go_fish.over? && !finished?
       finish
@@ -39,12 +39,16 @@ class Game < ApplicationRecord
   end
 
   def start
-    return unless player_count == user_count + bot_count
-    players = users.map {|user| Player.new(user.name, user_id: user.id)}
-    bot_players = (1..bot_count).to_a.map { |num| BotPlayer.new(user_id: -num) }
-    go_fish_game = GoFish.new(players + bot_players)
-    go_fish_game.start
-    update(go_fish: go_fish_game, started_at: Time.zone.now)
+
+    binding.pry
+
+    if player_count == user_count + bot_count
+      players = users.map {|user| Player.new(user.name, user_id: user.id)}
+      bot_players = (1..bot_count).to_a.map { |num| BotPlayer.new(user_id: -num) }
+      go_fish_game = GoFish.new(players + bot_players)
+      go_fish_game.start
+      update(go_fish: go_fish_game, started_at: Time.zone.now)
+    end
   end
 
   def finished?
@@ -67,7 +71,16 @@ class Game < ApplicationRecord
     }
   end
 
-  def state_for(user)
-    go_fish.state_for(user.id, waiting_count, name)
+  def game_not_started
+    {
+        id: id,
+        name: name,
+        started: false,
+        waitingCount: waiting_count,
+    }
+  end
+
+  def state_for(user_id)
+    go_fish != nil ? go_fish.state_for(user_id, waiting_count, name, id) : game_not_started
   end
 end

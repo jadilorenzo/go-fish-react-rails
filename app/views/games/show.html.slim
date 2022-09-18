@@ -1,3 +1,2 @@
 / = render partial: 'games/game_view', locals: {game: @game, current_player: @current_player, user: current_user}
-= react_component('Game', game: @game.state_for(current_user))
-/ = image_tag "C_A.svg", class: 'card-image'
+= react_component('Game', game: @game.state_for(current_user.id))

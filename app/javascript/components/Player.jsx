@@ -12,14 +12,15 @@ export default class Player extends Component {
         player: PropTypes.object.isRequired,
         cardSelected: PropTypes.bool,
         isYourTurn: PropTypes.bool,
+        isCurrentPlayer: PropTypes.bool.isRequired,
         you: PropTypes.bool
     }
 
     render() {
-        const { player, cardSelected, isYourTurn, you } = this.props
+        const { player, cardSelected, isYourTurn, isCurrentPlayer, you } = this.props
         return (
             <div className='player paper-border'>
-                <div className='player--section'>
+                <div className={`player--section ${isCurrentPlayer ? 'bold' : ''}`}>
                     <span>{player.name}</span>
                     <span>{!you || " (you)"}</span>
                     {you || <span>{player.handCount} card{player.handCount === 1 || 's'}</span>}

@@ -154,10 +154,11 @@ class GoFish
     }
   end
 
-  def state_for(user_id, waiting_count, name)
+  def state_for(user_id, waiting_count, name, id)
     player = find_by_id user_id
     {
-      currentUser: player.as_json,
+      id: id,
+      currentUser: player.as_state,
       opponents: return_opponents(player).map(&:as_opponent_json),
       roundResults: history,
       startedStatus: started_status,
