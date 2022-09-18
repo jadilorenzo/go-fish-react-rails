@@ -39,9 +39,6 @@ class Game < ApplicationRecord
   end
 
   def start
-
-    binding.pry
-
     if player_count == user_count + bot_count
       players = users.map {|user| Player.new(user.name, user_id: user.id)}
       bot_players = (1..bot_count).to_a.map { |num| BotPlayer.new(user_id: -num) }

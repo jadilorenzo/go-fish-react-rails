@@ -15,6 +15,15 @@ const Api = {
             })
         }).then(data => data.json())
         return data
+    },
+    getGame: ({id, userId}) => {
+        return fetch(`/games/${id}/state_for/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then(data => data.json())
     }
 }
 

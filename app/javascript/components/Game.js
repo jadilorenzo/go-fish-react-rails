@@ -4,19 +4,34 @@ import Card from './Card'
 import Player from './Player'
 import RoundResults from './RoundResults'
 import Api from './Api'
+import Pusher from 'pusher-js'
 
 export default class Game extends Component {
     constructor(props) {
         super(props)
+        this.state = { ...props.game, rank: '' }
 
-        this.state = {
-            ...props.game,
-            rank: ''
-        }
+        console.log(props)
+
+        if (props.game) this.connectToPusher(props)
     }
 
     static propTypes = {
         game:  PropTypes.object.isRequired,
+    }
+
+    connectToPusher(props) {
+        const pusher = new Pusher('0bb24337fdbe74754352', { cluster: 'us2' })
+        const channel = pusher.subscribe(`game-${props.game?.id}`);
+        channel.bind(`update-${props.game.currentUser?.id}`, (data) => this.getGame(props))
+        channel.bind(`joined`, (data) => this.getGame(props))
+        channel.bind(`over`, (data) => { window.location.pathname = `/over/${props.game?.id}` })
+    }
+
+    getGame(props) {
+        Api.getGame({ id: props.game?.id, userId: props.game.currentUser?.id }).then((data) => {
+            this.setState({...data})
+        })
     }
 
     async onAsk({ id }) {
@@ -30,7 +45,7 @@ export default class Game extends Component {
     }
 
     setRank({ rank }) {
-        this.setState({rank})
+        this.setState({ rank    })
     }
 
     render() {
@@ -53,7 +68,7 @@ export default class Game extends Component {
                 <h2>Go Fish</h2>
                 {(startedStatus) ?  (
                         <div>
-                            <div>{name}</div>
+                            <i>{name}</i>
                             <div className='app-top'>
                                 <div className='app--section'>
                                     <h4>Players</h4>

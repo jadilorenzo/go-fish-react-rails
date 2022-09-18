@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :game_users
   end
   patch '/games/:id/play_round', to: 'games#play_round'
+  get '/games/:id/state_for/:user_id', to: 'games#state_for'
   post '/join_game/:id', to: 'game_users#create', as: '/join_game'
   post '/login', to: 'session#create'
   delete '/logout', to: 'session#delete'
