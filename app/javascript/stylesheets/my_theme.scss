@@ -198,3 +198,72 @@ a.nav-bar__link {
 .bold {
   font-weight:  bold;
 }
+
+.flash {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.15rem solid #f0f0f0;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  &>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.flash__message-type {
+  display: inline;
+  font-weight: bold;
+}
+
+.material-icons--lg {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.game-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.game__link {
+  color: black;
+  padding-bottom: 0.125rem;
+  padding-top: 0.35rem;
+
+  &:hover {
+    padding-bottom: 0.25rem;
+    padding-top: 0;
+    border-bottom: 0.25rem solid;
+    border-color: var(--bg-primary);
+  }
+}
+
+.h1-title {
+  margin-bottom: 0.5rem;
+}
+
+.h2-title {
+  margin-top: 0.75rem;
+}

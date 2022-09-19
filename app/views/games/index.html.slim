@@ -1,8 +1,10 @@
 .
-  h1 My Games
+  .h1-title
+    h1 My Games
   = render partial: @my_games
 
 .
-  h1 Open Games
-  = link_to 'Create Game', new_game_path, class: 'btn-primary'
+  .h1-title
+    h1 Open Game
   = render partial: @open_games
+  = link_to 'Create Game', new_game_path, class: 'btn-primary'

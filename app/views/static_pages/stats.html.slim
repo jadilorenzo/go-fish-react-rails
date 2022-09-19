@@ -1,6 +1,8 @@
-h1 Stats
+.h1-title
+  h1 Stats
 div
-  h2 Games Played
+  .h2-title
+    h2 Games Played
   table
     tbody
     - @finished_games.each do |user, game_count|
@@ -13,7 +15,8 @@ div
           td = "#{user.name}: "
           td = "#{pluralize(game_count, 'Game')}"
 div
-  h2 Win %
+  .h2-title
+    h2 Win %
   table
     tbody
     - @win_percentage.each do |user, percentage|
@@ -26,7 +29,8 @@ div
           td = "#{user.name}: "
           td = "#{percentage}%"
 div
-  h2 Time Played
+  .h2-title
+    h2 Time Played
   table
     tbody
     - @time_played.each do |user, time|
@@ -39,7 +43,8 @@ div
           td = "#{user.name}: "
           td = "#{seconds_to_time(time.seconds)}"
 div
-  h2 Greatest Rival
+  .h2-title
+    h2 Greatest Rival
   table
     tbody
     - @rival.each do |rival, games|
